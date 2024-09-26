@@ -1,0 +1,7 @@
+.menu-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f0f0f0;
+    cursor: move;
+    text-align: center;
+}
