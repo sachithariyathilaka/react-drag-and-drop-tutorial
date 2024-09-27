@@ -1,0 +1,9 @@
+:root {
+    --gray: #f6f6f6;
+    --light-gray: rgba(237, 237, 237, 1);
+    --blue-opacity: rgba(30, 125, 204, 0.15);
+}
+
+body {
+    background-color: var(--gray);
+}

@@ -3,16 +3,16 @@ import MenuItem from './menu-item';
 import {ItemList} from "../../resource/menu/Item-list";
 import "../../asset/css/component/menu/menu.css"
 
-const Menu: React.FC<ItemList> = (ItemList) => {
+const Menu: React.FC<ItemList> = (itemList) => {
 
     const handleDragStart = (event: React.DragEvent<HTMLDivElement>, index: number) => {
-        if (ItemList.items.length === 1)
+        if (itemList.items.length === 1)
         {
             event.preventDefault();
-            alert('At least one country should be on the team.')
+            alert('At least one country should be on the group.')
         } else
         {
-            event.dataTransfer.setData('application/json', JSON.stringify({listId: ItemList.listId, index: index}));
+            event.dataTransfer.setData('application/json', JSON.stringify({id: itemList.id, index: index}));
             event.dataTransfer.effectAllowed = 'move';
         }
     };
@@ -26,22 +26,22 @@ const Menu: React.FC<ItemList> = (ItemList) => {
 
         const data = JSON.parse(event.dataTransfer.getData('application/json'));
         const draggedItemIndex = data.index;
-        const fromListId = data.listId;
+        const fromListId = data.id;
 
-        if (ItemList.listId === fromListId) {
-            const updatedItems = [...ItemList.items];
+        if (itemList.id === fromListId) {
+            const updatedItems = [...itemList.items];
             const [movedItem] = updatedItems.splice(draggedItemIndex, 1);
 
             updatedItems.splice(index, 0, movedItem);
-            ItemList.setItems(updatedItems);
+            itemList.setItems(updatedItems);
 
         } else
-            ItemList.handleItemDropBetweenLists(draggedItemIndex, fromListId, ItemList.listId, index);
+            itemList.handleItemDropBetweenLists(draggedItemIndex, fromListId, itemList.id, index);
     };
 
     return (
         <div className="menu">
-            {ItemList.items.map((item, index) => (
+            {itemList.items.map((item, index) => (
                 <MenuItem
                     key={item}
                     data={item}
